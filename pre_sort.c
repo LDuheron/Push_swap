@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:17:18 by lduheron          #+#    #+#             */
-/*   Updated: 2023/04/22 16:45:27 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:03:15 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	first_pre_sort(t_stack **stack_a, t_stack **stack_b, int min, int max)
 	float	rank_m;
 
 	tmp = *stack_a;
-	rank_m = rank_moyen((float)max, (float)min) / 2;
+	rank_m = rank_moyen((float)max, (float)min) / 1.5;
 	i = count_below_rank_m(stack_a, min, max, rank_m);
-	while (i > 0 && tmp->content && ft_lstsize(*stack_a) >= 4)
+	while (i > 0 && ft_lstsize(*stack_a) >= 4)
 	{
 		if (rank_m > (tmp->content - (float)min) / ((float)max
 				- (float)min + 1))
@@ -52,17 +52,14 @@ void	pre_sort(t_stack **stack_a, t_stack **stack_b, int min, int max)
 	rank_m = rank_moyen((float)max, (float)min);
 	tmp = *stack_a;
 	i = count_below_rank_m(stack_a, min, max, rank_m);
-	while (i > 0 && tmp->content && ft_lstsize(*stack_a) >= 4)
+	while (i > 0 && ft_lstsize(*stack_a) > 3)
 	{
-		if (rank_m > (tmp->content - (float)min) / (((float)max
-					- (float)min) + 1))
+		if (rank_m > ((float)tmp->content
+				- (float)min) / (((float)max - (float)min) + 1))
 		{
 			ft_pb(stack_a, stack_b);
 			i--;
 		}
-		else if ((*stack_b)->content > ft_lstlast(*stack_b)->content
-			&& ft_lstsize(*stack_b) > 2)
-			ft_rr(stack_a, stack_b);
 		else
 			ft_ra(stack_a);
 		tmp = (*stack_a);

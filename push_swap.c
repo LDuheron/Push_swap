@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 22:33:12 by lduheron          #+#    #+#             */
-/*   Updated: 2023/04/22 16:28:03 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:52:57 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	sort_more(t_stack **stack_a, t_stack **stack_b)
 	min = find_value_min(stack_a);
 	max = find_value_max(stack_a);
 	first_pre_sort(stack_a, stack_b, min, max);
-	while (ft_lstsize(*stack_a) > 3)
+	while (ft_lstsize(*stack_a) >= 4)
 	{
 		if (ft_lstsize(*stack_a) == 4)
 		{
@@ -50,6 +50,8 @@ void	sort_more(t_stack **stack_a, t_stack **stack_b)
 		min = find_value_min(stack_a);
 		max = find_value_max(stack_a);
 		pre_sort(stack_a, stack_b, min, max);
+		if (ft_lstsize(*stack_a) == 3)
+			break ;
 	}
 	sort_three(stack_a);
 	while (ft_lstsize(*stack_b) != 0)
