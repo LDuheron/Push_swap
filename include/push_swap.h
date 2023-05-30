@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 22:27:19 by lduheron          #+#    #+#             */
-/*   Updated: 2023/04/22 11:30:20 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:55:15 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,32 @@
 # define PUSH_SWAP_H
 
 # include <limits.h>
-# include "./Actions/actions.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+
+//////////////////////////////////////////////////////////////////
+//																//
+//																//
+//							STRUCTURE							//
+//																//
+//																//
+//////////////////////////////////////////////////////////////////
+
+typedef struct s_stack
+{
+	int				index;
+	int				content;
+	struct s_stack	*next;
+}				t_stack;
+
+//////////////////////////////////////////////////////////////////
+//																//
+//																//
+//							PROTOTYPES 							//
+//																//
+//																//
+//////////////////////////////////////////////////////////////////
 
 // Clean.c
 void	ft_lstclear(t_stack **lst);
@@ -67,5 +92,45 @@ long	ft_atol(const char *str);
 int		ft_is_sorted(t_stack **stack_a);
 void	ft_reorder(t_stack **stack);
 int		ft_strlen(char *str);
+
+//////////////////////////////////////////////////////////////////
+//																//
+//                 		IN ACTIONS DIR   		                //
+//																//
+//////////////////////////////////////////////////////////////////
+
+// Actions_utils.c
+void	ft_last_to_first(t_stack **stack);
+void	ft_remove_first_node(t_stack **stack);
+void	ft_remove_last_node(t_stack **stack);
+void	ft_putstr(char *str);
+
+// List_utils.c
+int		ft_lstsize(t_stack *lst);
+t_stack	*ft_lstlast(t_stack *lst);
+void	ft_lstadd_back(t_stack **lst, t_stack *new);
+void	ft_lstadd_front(t_stack **lst, t_stack *new);
+t_stack	*ft_lstnew(int content);
+
+// Push.c
+void	ft_push(t_stack **src, t_stack **dst);
+void	ft_pa(t_stack **stack_a, t_stack **stack_b);
+void	ft_pb(t_stack **stack_a, t_stack **stack_b);
+
+// Reverse_rotate.c
+void	ft_rra(t_stack **stack_a);
+void	ft_rrb(t_stack **stack_b);
+void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
+
+// Rotate.c
+void	ft_ra(t_stack **stack_a);
+void	ft_rb(t_stack **stack_b);
+void	ft_rr(t_stack **stack_a, t_stack **stack_b);
+
+// Swap.c
+void	ft_sa(t_stack **stack_a);
+void	ft_sb(t_stack **stack_b);
+void	ft_ss(t_stack **stack_a, t_stack **stack_b);
+void	ft_swap(t_stack **stack);
 
 #endif

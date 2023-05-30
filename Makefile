@@ -1,4 +1,13 @@
-NAME = push_swap
+#############################################
+
+NAME := push_swap
+
+#############################################
+
+#############################################
+
+SRC_DIR     := srcs
+OBJ_DIR     := obj
 
 SRCS += ./Actions/actions_utils.c
 SRCS += ./Actions/push.c
@@ -18,21 +27,32 @@ SRCS += pre_sort.c
 SRCS += push_swap.c
 SRCS += push_swap_utils.c
 
-CFLAGS = -Wall -Werror -Wextra -g3
-CC = cc
-RM = rm -rf
 
-OBJS = $(SRCS:.c=.o)
+SRCS        := $(SRCS:%=$(SRC_DIR)/%)
+OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-### RULES
+CC          := clang
+CFLAGS      := -Wall -Wextra -Werror -g3
+CPPFLAGS    := -I include
+
+#############################################
+
+RM          := rm -f
+MAKEFLAGS   += --no-print-directory
+DIR_DUP     = mkdir -p $(@D)
+
+#############################################
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(OBJS) -o $(NAME)
+	$(info CREATED $(NAME))
 
-%.o: %.cs
-	$(CC) $(CFLAGS) -c $^ -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(DIR_DUP)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(info CREATED $@)
 
 clean:
 	$(RM) $(OBJS)
@@ -40,8 +60,14 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
+
+#############################################
 
 .PHONY: all clean fclean re
 
 .SILENT:
+
+#############################################
